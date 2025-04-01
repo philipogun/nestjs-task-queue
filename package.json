@@ -1,12 +1,106 @@
 {
   "name": "nestjs-task-queue",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "Distributed task queue module for NestJS",
+  "keywords": [
+    "nestjs",
+    "task",
+    "queue",
+    "distributed",
+    "background jobs",
+    "redis",
+    "rabbitmq"
+  ],
+  "author": "Philip Ogunwobi <ogunwobiphilip@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/philipogun/nestjs-task-queue.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT"
+  "bugs": {
+    "url": "https://github.com/philipogun/nestjs-task-queue/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "eslint \"{src,test}/**/*.ts\" --fix",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "docs": "typedoc",
+    "prepublishOnly": "npm run build && npm run test && npm run lint"
+  },
+  "dependencies": {
+    "@nestjs/common": "^8.0.0 || ^9.0.0",
+    "@nestjs/core": "^8.0.0 || ^9.0.0",
+    "@nestjs/event-emitter": "^3.0.1",
+    "@nestjs/terminus": "^9.0.0",
+    "amqplib": "^0.10.0",
+    "class-validator": "^0.14.0",
+    "ioredis": "^5.2.0",
+    "nestjs-task-queue": "file:",
+    "prom-client": "^14.0.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.0.0"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^9.0.0",
+    "@nestjs/schematics": "^9.0.0",
+    "@nestjs/testing": "^9.0.0",
+    "@types/amqplib": "^0.10.0",
+    "@types/express": "^4.17.0",
+    "@types/jest": "^28.0.0",
+    "@types/node": "^16.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^8.0.0",
+    "eslint-plugin-jest": "^26.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "fork-ts-checker-webpack-plugin": "^9.0.3",
+    "jest": "^28.0.0",
+    "prettier": "^2.0.0",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^28.0.0",
+    "ts-loader": "^9.0.0",
+    "ts-node": "^10.0.0",
+    "tsconfig-paths": "^4.0.0",
+    "typedoc": "^0.23.0",
+    "typescript": "^4.0.0",
+    "webpack": "^5.98.0"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^8.0.0 || ^9.0.0",
+    "@nestjs/core": "^8.0.0 || ^9.0.0",
+    "rxjs": "^7.0.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": ".",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
 }
